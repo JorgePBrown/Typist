@@ -42,7 +42,7 @@ export default function TypedArea(props) {
   };
 
   return (
-    <div className="word">
+    <span className="word">
       <For each={letters()} fallback={<p>Loading...</p>}>
         {(item) => {
           const { letter, status } = item;
@@ -57,6 +57,6 @@ export default function TypedArea(props) {
           }
         }}
       </For>
-    </div>
+    </span>
   );
 }
