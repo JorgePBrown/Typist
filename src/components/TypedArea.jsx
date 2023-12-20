@@ -6,7 +6,7 @@ const LetterStatus = {
   UNTYPED: 2,
 };
 
-export default function Word(props) {
+export default function TypedArea(props) {
   const [typedWord, setTypedWord] = createSignal("");
 
   document.addEventListener("keydown", ({ key }) => handleKeyDown(key));

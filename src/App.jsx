@@ -1,6 +1,6 @@
 import { createResource, createSignal } from "solid-js";
 import "./App.css";
-import Word from "./components/Word";
+import TypedArea from "./components/TypedArea";
 import WordCounter from "./components/WordCounter";
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
   return (
     <Show when={!words.loading} fallback={<div>Loading...</div>}>
       <WordCounter />
-      <Word word={currentWord()} />
+      <TypedArea word={currentWord()} />
     </Show>
   );
 }
