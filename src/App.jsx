@@ -4,7 +4,7 @@ import Word from "./components/Word";
 
 function App() {
   const [words] = createResource(() =>
-    fetch("./words.json").then((res) => res.json()),
+    fetch("./common-words.json").then((res) => res.json()),
   );
 
   return (
