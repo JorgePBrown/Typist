@@ -1,8 +1,8 @@
-import { Match, createEffect, createResource, createSignal } from "solid-js";
+import { Match, createResource, createSignal } from "solid-js";
 import "./App.css";
 import Word from "./components/Word";
-import TypedArea from "./components/TypedArea";
 import WordCounter from "./components/WordCounter";
+import Sentence from "./components/Sentence";
 
 const Mode = {
   RANDOM: 0,
@@ -43,17 +43,32 @@ function RandomWords() {
 }
 
 function Quotes() {
-  const [quote, { refetch }] = createResource(() =>
-    fetch("https://api.api-ninjas.com/v1/quotes", { headers: { "X-Api-Key": import.meta.env.VITE_API_NINJAS_API_KEY }}).then((res) => res.json()),
+  const [quotes, { refetch }] = createResource(() =>
+    fetch("https://api.api-ninjas.com/v1/quotes", {
+      headers: { "X-Api-Key": import.meta.env.VITE_API_NINJAS_API_KEY },
+    }).then((res) => res.json()),
   );
 
-  document.addEventListener("wordtyped", refetch)
+  document.addEventListener("sentencetyped", refetch);
+
+  const quote = () => !quotes.loading && quotes()[0];
+  const words = () => {
+    if (quotes.loading) return [];
+
+    const q = quote().quote.split(" ");
+
+    for (let i = 0; i < q.length - 1; ++i) {
+      q[i] = q[i] + " ";
+    }
+
+    return q;
+  };
 
   return (
-    <Show when={!quote.loading} fallback={<div>Loading...</div>}>
-      <WordCounter/>
-      <TypedArea word={quote()[0].quote}/>
-      <p>Author: {quote()[0].author}</p>
+    <Show when={!quotes.loading} fallback={<div>Loading...</div>}>
+      <WordCounter />
+      <Sentence words={words()} />
+      <p>Author: {quote().author}</p>
     </Show>
   );
 }

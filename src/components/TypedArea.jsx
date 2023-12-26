@@ -12,6 +12,7 @@ export default function TypedArea(props) {
   document.addEventListener("keydown", ({ key }) => handleKeyDown(key));
 
   function handleKeyDown(k) {
+    if (!props.word) return;
     if (k === "Backspace") {
       setTypedWord((w) => w.slice(0, w.length - 1));
     } else if (k.length === 1 && typedWord().length < props.word.length) {
@@ -27,7 +28,7 @@ export default function TypedArea(props) {
   const letters = () => {
     const arr = [];
     const tWord = typedWord();
-    for (let i = 0; i < props.word.length; ++i) {
+    for (let i = 0; props.word && i < props.word.length; ++i) {
       const letter = props.word[i];
       const typedLetter = tWord[i];
       const status =
