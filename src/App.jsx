@@ -65,11 +65,13 @@ function Quotes() {
   };
 
   return (
-    <Show when={!quotes.loading} fallback={<div>Loading...</div>}>
+    <div>
       <WordCounter />
-      <Sentence words={words()} />
-      <p>Author: {quote().author}</p>
-    </Show>
+      <Show when={!quotes.loading} fallback={<div>Loading...</div>}>
+        <Sentence words={words()} />
+        <p>Author: {quote().author}</p>
+      </Show>
+    </div>
   );
 }
 
