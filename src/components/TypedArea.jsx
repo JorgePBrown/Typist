@@ -48,13 +48,17 @@ export default function TypedArea(props) {
         {(item) => {
           const { letter, status } = item;
           if (status === LetterStatus.UNTYPED) {
-            return <span className="letter bg-neutral-600">{letter}</span>;
+            return <span className="letter underline">{letter}</span>;
           }
           if (status === LetterStatus.CORRECT) {
-            return <span className="letter bg-green-600">{letter}</span>;
+            return (
+              <span className="letter underline text-green-600">{letter}</span>
+            );
           }
           if (status === LetterStatus.INCORRECT) {
-            return <span className="letter bg-red-600">{letter}</span>;
+            return (
+              <span className="letter underline bg-red-600">{letter}</span>
+            );
           }
         }}
       </For>
